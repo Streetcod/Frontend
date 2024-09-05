@@ -1,0 +1,23 @@
+services:
+    mssql:
+        container_name: mssql_local
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        environment:
+            ACCEPT_EULA: "Y"
+            MSSQL_SA_PASSWORD: "Ss11_ddd"
+        ports:
+            - 1433:1433
+    frontend:
+        restart: always
+        image: Yurti/streetcode_cli
+        environment:
+            REACT_APP_BACKEND_URL: backend:5001
+        ports:
+            - 3000:3000
+
+    backend:
+        restart: always
+        image: Yurti/streetcode_back
+        depends_on:
+            - mssql
+
