@@ -7,17 +7,30 @@ services:
             MSSQL_SA_PASSWORD: "Ss11_ddd"
         ports:
             - 1433:1433
+        networks:
+          - app-network
     frontend:
         restart: always
-        image: Yurti/streetcode_cli
+        image: docker.io/yurti/streetcode_cli
         environment:
-            REACT_APP_BACKEND_URL: backend:5001
+            REACT_APP_BACKEND_URL: http://backend:5000
+        depends_on:
+          - backend
         ports:
             - 3000:3000
+        networks:
+          - app-network
 
     backend:
         restart: always
-        image: Yurti/streetcode_back
+        image: docker.io/yurti/streetcode_back
         depends_on:
             - mssql
-
+        networks:
+          - app-network
+        ports:
+            - 5001:5001
+            - 5000:5000
+networks:
+  app-network:
+    driver: bridge
