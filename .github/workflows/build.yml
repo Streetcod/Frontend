@@ -1,0 +1,28 @@
+name: Build and Test
+
+on:
+  push:
+    branches: main
+  workflow_dispatch: 
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup node 
+        uses: actions/setup-node@v3
+        with:
+          version: 16
+
+      - name: Install modules
+        run: npm install 
+
+      - name: Build
+        run: npm build
+
+      - name: Test 
+        run: npm run test:cover
