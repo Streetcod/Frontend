@@ -1,19 +1,20 @@
 import './MainPage.styles.scss';
 
 import ScrollToTopBtn from '../../app/common/components/ScrollToTopBtn/ScrollToTopBtn.component';
+
 import InstagramBlock from './InstagramBlock/InstagramBlock.component';
+import NewsSliderComponent from './NewsSlider/NewsSlider.component';
 import PartnersBlockComponent from './PartnersBlockMain/PartnersBlockMain.component';
 import StaticBanner from './StaticBanners/StaticBanner.component';
 import StreetcodeSliderComponent from './StreetcodeSlider/StreetcodeSlider.component';
 import TeamComponent from './TeamSlider/TeamComponent.component';
 import TopCarouselComponent from './TopCarousel/TopCarousel.component';
-import NewsSliderComponent from './NewsSlider/NewsSlider.component';
 
 const mainPageContent = () => (
     <>
-    <TopCarouselComponent/>
-    <div className="mainPageContainer">
-            <StreetcodeSliderComponent/>
+        <TopCarouselComponent />
+        <div className="mainPageContainer">
+            <StreetcodeSliderComponent />
             <StaticBanner
                 id="catalog"
                 blockName="Хочеш більше стріткодів?"
@@ -23,10 +24,10 @@ const mainPageContent = () => (
                     window.location.href = '../catalog';
                 }}
             />
-            <NewsSliderComponent/>
-            <TeamComponent/>
-            <PartnersBlockComponent/>
-            <InstagramBlock/>
+            <NewsSliderComponent />
+            <TeamComponent />
+            <PartnersBlockComponent />
+            <InstagramBlock />
             <StaticBanner
                 id="support"
                 blockName="Слід в історії у кожного різний. У тебе може бути свій"
@@ -36,13 +37,13 @@ const mainPageContent = () => (
                     window.location.href = '../support-us';
                 }}
             />
-   
-        <div className="sticky">
-            <div className="sticky-content">
-                <ScrollToTopBtn/>
+
+            <div className="sticky">
+                <div className="sticky-content">
+                    <ScrollToTopBtn />
+                </div>
             </div>
         </div>
-    </div>
     </>
 );
 

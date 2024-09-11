@@ -24,7 +24,7 @@ const ModalWrapper = () => (
         <ConfirmationModal />
         <RelatedFigureItemModal />
         <StatisticsModal />
-        <SurveyModal/>
+        <SurveyModal />
     </>
 );
 

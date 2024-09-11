@@ -5,13 +5,13 @@ import { useEffect, useState } from 'react';
 import useMobx from '@stores/root-store';
 
 import NewsApi from '@/app/api/news/news.api';
+import useWindowSize from '@/app/common/hooks/stateful/useWindowSize.hook';
 import News from '@/models/news/news.model';
 
 import SlickSlider from '../../SlickSlider/SlickSlider.component';
 import Heading from '../Heading/Heading.component';
 
 import NewsSliderItem from './NewsSliderItem/NewsSliderItem.component';
-import useWindowSize from '@/app/common/hooks/stateful/useWindowSize.hook';
 
 const NewsSlider = () => {
     const { streetcodeMainPageStore, newsStore } = useMobx();
@@ -37,7 +37,7 @@ const NewsSlider = () => {
         touchThreshold: 25,
         transform: 'translateZ(0)',
         arrows: false,
-        dots:windowSize.width < 1024,
+        dots: windowSize.width < 1024,
         infinite: true,
         variableWidth: true,
         slidesToShow: 1,

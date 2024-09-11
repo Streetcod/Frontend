@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 import './MainBlockAdmin.style.scss';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { InboxOutlined } from '@ant-design/icons';
 import CreateUpdateMediaStore from '@app/stores/create-update-media-store';
@@ -9,7 +9,7 @@ import useMobx from '@app/stores/root-store';
 import { ModelState } from '@models/enums/model-state';
 import Image, { ImageUpdate } from '@models/media/image.model';
 
-import { UploadFile } from 'antd';
+import { Modal, UploadFile } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
 
 import AudiosApi from '@/app/api/media/audios.api';
@@ -19,9 +19,6 @@ import base64ToUrl from '@/app/common/utils/base64ToUrl.utility';
 import Audio, { AudioUpdate } from '@/models/media/audio.model';
 
 import PreviewFileModal from './PreviewFileModal/PreviewFileModal.component';
-
-import { Modal } from 'antd';
-import { useCallback, useState } from 'react'
 
 const convertFileToUploadFile = (file: Image | Audio) => {
     const newFileList: UploadFile = {
@@ -74,30 +71,30 @@ const FileInputsPart = ({ onChange }) => {
 
     const typeDef = () => {
         switch (idHandle) {
-            case 'gif': {
-                handleFileRemove('animationId', 'imagesUpdate');
-                setAnimation((prev) => prev.filter((x) => x.uid !== fileHandle.uid));
-                handleCancelModalRemove();
-                break;
-            }
-            case 'blackAndWhite': {
-                handleFileRemove('blackAndWhiteId', 'imagesUpdate');
-                setBlackAndWhite((prev) => prev.filter((x) => x.uid !== fileHandle.uid));
-                handleCancelModalRemove();
-                break;
-            }
-            case 'relatedFigure': {
-                handleFileRemove('relatedFigureId', 'imagesUpdate');
-                setRelatedFigure((prev) => prev.filter((x) => x.uid !== fileHandle.uid));
-                handleCancelModalRemove();
-                break;
-            }
-            case 'audio': {
-                handleFileRemove('audioId', 'audioUpdate');
-                setAudio((prev) => prev.filter((x) => x.uid !== fileHandle.uid));
-                handleCancelModalRemove();
-                break;
-            }
+        case 'gif': {
+            handleFileRemove('animationId', 'imagesUpdate');
+            setAnimation((prev) => prev.filter((x) => x.uid !== fileHandle.uid));
+            handleCancelModalRemove();
+            break;
+        }
+        case 'blackAndWhite': {
+            handleFileRemove('blackAndWhiteId', 'imagesUpdate');
+            setBlackAndWhite((prev) => prev.filter((x) => x.uid !== fileHandle.uid));
+            handleCancelModalRemove();
+            break;
+        }
+        case 'relatedFigure': {
+            handleFileRemove('relatedFigureId', 'imagesUpdate');
+            setRelatedFigure((prev) => prev.filter((x) => x.uid !== fileHandle.uid));
+            handleCancelModalRemove();
+            break;
+        }
+        case 'audio': {
+            handleFileRemove('audioId', 'audioUpdate');
+            setAudio((prev) => prev.filter((x) => x.uid !== fileHandle.uid));
+            handleCancelModalRemove();
+            break;
+        }
         }
     };
 
@@ -169,7 +166,7 @@ const FileInputsPart = ({ onChange }) => {
                     label="Анімація"
                     rules={[{
                         required: !(parseId && images.length > 1),
-                        message: parseId ? 'Змінити анімацію' : 'Завантажте анімацію'
+                        message: parseId ? 'Змінити анімацію' : 'Завантажте анімацію',
                     }]}
                 >
                     <FileUploader
@@ -190,10 +187,10 @@ const FileInputsPart = ({ onChange }) => {
                         onSuccessUpload={(file: Image) => {
                             handleFileUpload(file.id, 'animationId', 'imagesUpdate');
                             setAnimation([convertFileToUploadFile(file)]);
-                            setFileValidationError(null)
+                            setFileValidationError(null);
                         }}
                         onRemove={(file) => {
-                            fileHandler(file, "gif")
+                            fileHandler(file, 'gif');
                         }}
                     >
                         <InboxOutlined />
@@ -201,13 +198,13 @@ const FileInputsPart = ({ onChange }) => {
                     </FileUploader>
                     {fileValidationError && <div style={{ color: 'red' }}>{fileValidationError}</div>}
                 </FormItem>
-                
+
                 <FormItem
                     name="pictureBlackWhite"
                     label="Чорнобіле"
                     rules={[{
                         required: !(parseId && images.length > 1),
-                        message: parseId ? 'Змінити' : '+ Додати'
+                        message: parseId ? 'Змінити' : '+ Додати',
                     }]}
                 >
                     <FileUploader
@@ -223,7 +220,7 @@ const FileInputsPart = ({ onChange }) => {
                             setBlackAndWhite([convertFileToUploadFile(file)]);
                         }}
                         onRemove={(file) => {
-                            fileHandler(file, "blackAndWhite")
+                            fileHandler(file, 'blackAndWhite');
                         }}
                     >
                         <InboxOutlined />
@@ -248,7 +245,7 @@ const FileInputsPart = ({ onChange }) => {
                             setRelatedFigure([convertFileToUploadFile(file)]);
                         }}
                         onRemove={(file) => {
-                            fileHandler(file, "relatedFigure");
+                            fileHandler(file, 'relatedFigure');
                         }}
                     >
                         <InboxOutlined />
@@ -272,7 +269,7 @@ const FileInputsPart = ({ onChange }) => {
                             setAudio([convertFileToUploadFile(file)]);
                         }}
                         onRemove={(file) => {
-                            fileHandler(file, "audio")
+                            fileHandler(file, 'audio');
                         }}
                     >
                         <InboxOutlined />
@@ -280,7 +277,7 @@ const FileInputsPart = ({ onChange }) => {
                     </FileUploader>
                 </FormItem>
                 <Modal
-                    title={`Ви впевнені, що хочете видалити даний елемент?`}
+                    title="Ви впевнені, що хочете видалити даний елемент?"
                     open={visibleModal}
                     onOk={(e) => {
                         typeDef();

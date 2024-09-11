@@ -29,7 +29,7 @@ const StreetcodeSliderItem = ({ streetcode }: Props) => {
             return text;
         }
         const truncatedText = text.substring(0, maxLength);
-        return truncatedText.substring(0, truncatedText.lastIndexOf(' ')) + '...';
+        return `${truncatedText.substring(0, truncatedText.lastIndexOf(' '))}...`;
     };
 
     const teaserText = truncateText(streetcode?.teaser || '', 340);
@@ -40,7 +40,6 @@ const StreetcodeSliderItem = ({ streetcode }: Props) => {
                 .then((imgs) => setImage(imgs))
                 .catch((e) => { });
         }
-
     }, [streetcode]);
 
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -63,20 +62,21 @@ const StreetcodeSliderItem = ({ streetcode }: Props) => {
                 </div>
                 <div className="rightSlider">
                     <div className="streetcodeMainPageContainer">
-                        <div className='textContainer'>
-                            {windowsize.width > 1024 && ( <h2 className="streercodeTitle">
-                                {streetcode?.title}
-                            </h2>
+                        <div className="textContainer">
+                            {windowsize.width > 1024 && (
+                                <h2 className="streercodeTitle">
+                                    {streetcode?.title}
+                                </h2>
                             )}
                             <div className="streetcodeAlias">
                                 {streetcode?.text}
                             </div>
                             {windowsize.width > 1024 && (
-                            <div>
-                                <p className="streetcodeTeaser">
-                                    {teaserText}
-                                </p>
-                            </div>
+                                <div>
+                                    <p className="streetcodeTeaser">
+                                        {teaserText}
+                                    </p>
+                                </div>
                             )}
                             <div>
                                 <a className="streetcodeLink" href={streetcode.transliterationUrl} onClick={handleLinkClick}>

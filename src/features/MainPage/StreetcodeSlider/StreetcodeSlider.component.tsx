@@ -1,12 +1,15 @@
 import './StreetcodeSlider.styles.scss';
-import StreetcodeSliderItem from './StreetcodeSliderItem/StreetcodeSliderItem.component';
 
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
-import { StreetcodeMainPage } from '@/models/streetcode/streetcode-types.model';
+
 import StreetcodesApi from '@/app/api/streetcode/streetcodes.api';
-import SlickSlider from './../../SlickSlider/SlickSlider.component';
 import useWindowSize from '@/app/common/hooks/stateful/useWindowSize.hook';
+import { StreetcodeMainPage } from '@/models/streetcode/streetcode-types.model';
+
+import SlickSlider from '../../SlickSlider/SlickSlider.component';
+
+import StreetcodeSliderItem from './StreetcodeSliderItem/StreetcodeSliderItem.component';
 
 const shuffleArray = (array: any) => {
     const shuffledArray = [...array];
@@ -32,8 +35,6 @@ const StreetcodeSlider = () => {
         fetchStreetcodesMainPageAll();
     }, []);
 
-
-
     const props = {
         touchAction: 'pan-y',
         touchThreshold: 25,
@@ -49,10 +50,8 @@ const StreetcodeSlider = () => {
     };
 
     const windowsize = useWindowSize();
-    if (windowsize.width <= 1024 && windowsize.width >= 768)
-        props.centerMode = true;
-    if (windowsize.width <= 1024)
-        props.dots = true;
+    if (windowsize.width <= 1024 && windowsize.width >= 768) props.centerMode = true;
+    if (windowsize.width <= 1024) props.dots = true;
 
     if (shuffledStreetcode.length > 0) {
         return (

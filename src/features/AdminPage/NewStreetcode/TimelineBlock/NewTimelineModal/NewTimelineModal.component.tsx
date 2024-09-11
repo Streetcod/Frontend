@@ -222,7 +222,10 @@ const NewTimelineModal: React.FC<NewTimelineModalProps> = observer(({ timelineIt
                         </Form.Item>
                         {tagInput && (
                             <div className="tagInput-counter">
-                                {tagInput.length} / {maxContextLength}
+                                {tagInput.length}
+                                {' '}
+/
+                                {maxContextLength}
                             </div>
                         )}
                     </div>

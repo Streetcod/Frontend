@@ -48,15 +48,14 @@ const DonationBlock = () => {
     const count = (donateAmount.toString().match(/1/g) || []).length;
     const zeroCount = (donateAmount.toString().match(/0/g) || []).length;
 
-
-    const inputWidth =  donateAmount.toString().length * charWidth - count * firstWidth + zeroCount * zeroWidth;
+    const inputWidth = donateAmount.toString().length * charWidth - count * firstWidth + zeroCount * zeroWidth;
 
     const style = { '--input-width': `${inputWidth}px` } as React.CSSProperties;
 
     const handlePost = async () => {
         const donation: Donation = {
-            amount: donateAmount, 
-            pageUrl: window.location.href
+            amount: donateAmount,
+            pageUrl: window.location.href,
         };
 
         if (isCheckboxChecked) {
@@ -108,7 +107,7 @@ const DonationBlock = () => {
                 {possibleDonateAmounts.map((amount, idx) => (
                     <Button
                         key={amount}
-                        className={( donateAmount === possibleDonateAmounts[idx]) ? 'active' : ''}
+                        className={(donateAmount === possibleDonateAmounts[idx]) ? 'active' : ''}
                         onClick={() => handleAmountBtnClick(idx)}
                     >
                         {amount}
@@ -117,9 +116,9 @@ const DonationBlock = () => {
                 ))}
             </div>
             <div className="donatesInputContainer">
-                <Checkbox 
-                    className="checkbox-borderline" 
-                    checked={isCheckboxChecked} 
+                <Checkbox
+                    className="checkbox-borderline"
+                    checked={isCheckboxChecked}
                     onChange={(e) => setIsCheckboxChecked(e.target.checked)}
                 >
                     Я даю згоду на обробку моїх персональних даних

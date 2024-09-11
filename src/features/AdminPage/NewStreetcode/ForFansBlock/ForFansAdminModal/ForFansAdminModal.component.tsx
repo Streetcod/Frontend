@@ -27,7 +27,9 @@ interface Props {
     onChange: (field: string, value: any) => void,
 }
 
-const ForFansModal = ({ character_limit, open, setOpen, allCategories, onChange } : Props) => {
+const ForFansModal = ({
+    character_limit, open, setOpen, allCategories, onChange,
+} : Props) => {
     const { sourceCreateUpdateStreetcode, sourcesAdminStore } = useMobx();
     const editorRef = useRef<Editor | null>(null);
     const categoryUpdate = useRef<StreetcodeCategoryContent | null>();
@@ -35,7 +37,7 @@ const ForFansModal = ({ character_limit, open, setOpen, allCategories, onChange 
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const [form] = Form.useForm();
     const [selectedText, setSelected] = useState('');
-    const setOfKeys = new Set(['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight','End','Home']);
+    const setOfKeys = new Set(['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'End', 'Home']);
     const maxLength = character_limit || 1000;
     const getAvailableCategories = (): SourceCategoryName[] => {
         const selected = sourceCreateUpdateStreetcode.streetcodeCategoryContents
@@ -175,7 +177,7 @@ const ForFansModal = ({ character_limit, open, setOpen, allCategories, onChange 
                             toolbar: 'undo redo blocks bold italic link align | underline superscript subscript '
                      + 'formats blockformats align | removeformat strikethrough ',
                             toolbar_mode: 'sliding',
-                            language: "uk",
+                            language: 'uk',
                             content_style: 'body { font-family:Roboto,Helvetica Neue,sans-serif; font-size:14px }',
                         }}
                         onPaste={(e, editor) => {

@@ -1,14 +1,16 @@
+import './NewsSliderItem.styles.scss';
+
 import { useEffect, useRef, useState } from 'react';
 import useMobx from '@stores/root-store';
-import base64ToUrl from '@/app/common/utils/base64ToUrl.utility';
-import { StreetcodeCatalogRecord, StreetcodeMainPage } from '@/models/streetcode/streetcode-types.model';
-import './NewsSliderItem.styles.scss';
-import Image from '@/models/media/image.model';
-import ImagesApi from '@/app/api/media/images.api';
-import News from '@/models/news/news.model';
 import htmlReactParser, { domToReact } from 'html-react-parser';
+
+import ImagesApi from '@/app/api/media/images.api';
 import useWindowSize from '@/app/common/hooks/stateful/useWindowSize.hook';
+import base64ToUrl from '@/app/common/utils/base64ToUrl.utility';
 import { toArticleRedirectClickEvent } from '@/app/common/utils/googleAnalytics.unility';
+import Image from '@/models/media/image.model';
+import News from '@/models/news/news.model';
+import { StreetcodeCatalogRecord, StreetcodeMainPage } from '@/models/streetcode/streetcode-types.model';
 
 interface Props {
     news: News;
@@ -43,36 +45,32 @@ const NewsSliderItem = ({ news }: Props) => {
             truncatedText = truncatedText.substr(0, 75);
         }
 
-        if(screenSize.width<=649 && screenSize.width>768){
+        if (screenSize.width <= 649 && screenSize.width > 768) {
             truncatedText = truncatedText.substr(0, 200);
         }
 
-        
-        
-        return truncatedText.substr(0, truncatedText.lastIndexOf(' ')) + '...';
+        return `${truncatedText.substr(0, truncatedText.lastIndexOf(' '))}...`;
     };
 
     const newsText = truncateText(news?.text || '', 400);
 
     const options: any = {
         replace: (domNode: { type: string; name: string; children: any; }) => {
-          if (domNode.type === 'tag') {
-            if (domNode.name === 'p') {
-                return <span className="newsText">{domToReact(domNode.children, options)}</span>;
-            } else if (domNode.name === 'strong') {
-              return <span className="newsText">{domToReact(domNode.children, options)}</span>;
+            if (domNode.type === 'tag') {
+                if (domNode.name === 'p') {
+                    return <span className="newsText">{domToReact(domNode.children, options)}</span>;
+                } if (domNode.name === 'strong') {
+                    return <span className="newsText">{domToReact(domNode.children, options)}</span>;
+                }
             }
-          }
         },
-      };
-      
+    };
 
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         toArticleRedirectClickEvent(news.url.toString());
-        window.location.href = "news/" + news.url.toString();
+        window.location.href = `news/${news.url.toString()}`;
     };
-
 
     return (
         <div className="newsSliderItem">

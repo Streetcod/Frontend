@@ -46,7 +46,11 @@ const StreetcodeCatalogItem = ({ streetcode, isLast, handleNextScreen }: Props) 
                             <p>{streetcode.title}</p>
                             {
                                 streetcode.alias !== null && streetcode.alias?.trim() !== '' ? (
-                                    <p className="aliasText">({streetcode.alias})</p>
+                                    <p className="aliasText">
+(
+                                        {streetcode.alias}
+)
+                                    </p>
                                 ) : undefined
                             }
                         </div>
@@ -61,7 +65,11 @@ const StreetcodeCatalogItem = ({ streetcode, isLast, handleNextScreen }: Props) 
                             <p>{streetcode.title}</p>
                             {
                                 streetcode.alias !== null && streetcode.alias?.trim() !== '' ? (
-                                    <p className="aliasText">({streetcode.alias})</p>
+                                    <p className="aliasText">
+(
+                                        {streetcode.alias}
+)
+                                    </p>
                                 ) : undefined
                             }
                         </div>

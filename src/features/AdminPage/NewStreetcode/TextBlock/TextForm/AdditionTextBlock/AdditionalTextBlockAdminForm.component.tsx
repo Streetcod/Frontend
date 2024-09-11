@@ -22,7 +22,7 @@ const AdditionalTextBlockAdminForm = ({ character_limit, inputInfo, setInputInfo
         onChange('additionalText', content);
     };
     const [selected, setSelected] = useState('');
-    const setOfKeys = new Set(['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight','End','Home']);
+    const setOfKeys = new Set(['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'End', 'Home']);
     const maxLength = character_limit || 200;
 
     return (

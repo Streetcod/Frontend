@@ -14,7 +14,9 @@ interface Props {
     onChange: (fieldName: string, value: any) => void;
 }
 
-const TextBlock = React.memo(({ inputInfo, setInputInfo, video, setVideo, onChange }: Props) => (
+const TextBlock = React.memo(({
+    inputInfo, setInputInfo, video, setVideo, onChange,
+}: Props) => (
     <TextForm inputInfo={inputInfo} setInputInfo={setInputInfo} video={video} setVideo={setVideo} onChange={onChange} />
 ));
 

@@ -12,7 +12,7 @@ interface Props {
 
 const CurrentClick = (e: any) => {
     e.stopPropagation();
-}
+};
 
 const ProgressBarSection = ({ idx, block: { title, height }, isBlockActive }: Props) => (
     <Popover
