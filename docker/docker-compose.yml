@@ -11,7 +11,7 @@ services:
           - app-network
     frontend:
         restart: always
-        image: docker.io/yurti/streetcode_cli
+        image: yurti/streetcode_cli
         environment:
             REACT_APP_BACKEND_URL: http://backend:5000
         depends_on:
@@ -23,14 +23,15 @@ services:
 
     backend:
         restart: always
-        image: docker.io/yurti/streetcode_back
+        image: yurti/streetcode_back
         depends_on:
             - mssql
+        ports:
+            - "5000:5000"
+            - "5001:5001"
         networks:
           - app-network
-        ports:
-            - 5001:5001
-            - 5000:5000
+
 networks:
   app-network:
     driver: bridge
