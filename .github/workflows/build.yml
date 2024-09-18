@@ -26,7 +26,11 @@ jobs:
       # Uncomment when the source code will be fixed
       #- name: Lint
       #  run: npm run lint -- --fix
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: build
 
+    steps:
       - name: Setup docker 
         run: docker build -t yurti/streetcode_cli .
   
