@@ -26,3 +26,17 @@ jobs:
       # Uncomment when the source code will be fixed
       #- name: Lint
       #  run: npm run lint -- --fix
+
+      - name: Setup docker 
+        run: docker build -t yurti/streetcode_cli .
+  
+      - name: Login into Dockerhub
+        id: docker-hub
+        env:
+          username: ${{secrets.DOCKERHUB_LOGIN}}
+          password: ${{secrets.DOCKERHUB_PASS}}
+        run: docker login -u $username -p $password   
+
+      - name: Push to dockerhub
+        id: push-docker-image
+        run: docker push yurti/streetcode_cli:latest
