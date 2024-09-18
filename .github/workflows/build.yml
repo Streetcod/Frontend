@@ -31,6 +31,8 @@ jobs:
     needs: build
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Setup docker 
         run: docker build -t yurti/streetcode_cli .
   
