@@ -1,5 +1,5 @@
 services:
-    mssql:
+    mssql-service:
         container_name: mssql_local
         image: mcr.microsoft.com/mssql/server:2022-latest
         environment:
@@ -25,7 +25,7 @@ services:
         restart: always
         image: docker.io/yurti/streetcode_back
         depends_on:
-            - mssql
+            - mssql-service
         ports:
             - "5000:5000"
             - "5001:5001"
