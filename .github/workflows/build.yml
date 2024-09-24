@@ -46,3 +46,22 @@ jobs:
       - name: Push to dockerhub
         id: push-docker-image
         run: docker push yurti/streetcode_cli:latest
+  trigger-k8s:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${secrets.PAT}
+          script: |
+            await github.rest.actions.createworkflowDispatch({
+                owner: 'Seecherr',
+                repo: 'Streetcode_K8s',
+                workflow_id: 'blank.yml',
+                ref: 'main'
+            })            
+        
+      
+    
+    
