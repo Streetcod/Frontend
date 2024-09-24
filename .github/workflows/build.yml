@@ -48,7 +48,7 @@ jobs:
         run: docker push yurti/streetcode_cli:latest
   trigger-k8s:
     runs-on: ubuntu-latest
-    
+    needs: docker-build
     steps:
        - name: Fire event
          run: |
