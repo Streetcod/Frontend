@@ -47,7 +47,6 @@ jobs:
         id: push-docker-image
         run: docker push yurti/streetcode_cli:latest
   trigger-k8s:
-    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     
     steps:
