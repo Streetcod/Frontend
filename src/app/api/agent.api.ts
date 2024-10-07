@@ -6,8 +6,10 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import FRONTEND_ROUTES from '../common/constants/frontend-routes.constants';
 import UserLoginStore from '../stores/user-login-store';
 
-axios.defaults.baseURL = process.env.NODE_ENV === 'development'
-    ? 'https://localhost:5001/api' : 'http://185.230.138.173:5000/api';
+// axios.defaults.baseURL = process.env.NODE_ENV === 'development'
+//     ? 'https://localhost:5001/api' : '/api';
+
+axios.defaults.baseURL = process.env.BASE_URL || "https://localhost:5001/api"
 
 axios.interceptors.response.use(
     async (response) => response,
