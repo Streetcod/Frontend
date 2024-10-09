@@ -12,6 +12,7 @@ services:
         volumes:
           - mssql-data:/var/opt/mssql
           - ./init.sql:/docker-entrypoint-initdb.d
+
     frontend:
         restart: always
         image: docker.io/yurti/streetcode_cli
@@ -31,13 +32,15 @@ services:
         depends_on:
             - mssql-service
         environment:
-            STREETCODE_ConnectionStrings__DefaultConnection: Server=mssql-service,1433;Database=master;User Id=sa;Password=Ss11_ddd;MultipleActiveResultSets=false;Encrypt=False;TrustServerCertificate=True;
-            ASPNETCORE_URLS: https://localhost:5001
+            STREETCODE_ConnectionStrings__DefaultConnection: *
+            ASPNETCORE_URLS: https://0.0.0.0:5001
         ports:
             - "5000:5000"
             - "5001:5001"
         networks:
           - app-network
+        volumes:
+          - ./../../BlobStorageFolder:/BlobStorageFolder
 
 networks:
   app-network:

@@ -6,10 +6,7 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import FRONTEND_ROUTES from '../common/constants/frontend-routes.constants';
 import UserLoginStore from '../stores/user-login-store';
 
-// axios.defaults.baseURL = process.env.NODE_ENV === 'development'
-//     ? 'https://localhost:5001/api' : '/api';
-
-axios.defaults.baseURL = process.env.BASE_URL || "https://localhost:5001/api"
+axios.defaults.baseURL = "/api"
 
 axios.interceptors.response.use(
     async (response) => response,
@@ -41,7 +38,6 @@ axios.interceptors.response.use(
         if (errorMessage !== '' && process.env.NODE_ENV === 'development') {
             toast.error(errorMessage);
         }
-
         return Promise.reject(message);
     },
 );
